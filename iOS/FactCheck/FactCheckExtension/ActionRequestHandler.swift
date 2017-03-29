@@ -12,8 +12,12 @@ import MobileCoreServices
 class ActionRequestHandler: NSObject, NSExtensionRequestHandling {
 
     var extensionContext: NSExtensionContext?
+    var factChecker: FactChecker!
     
     func beginRequest(with context: NSExtensionContext) {
+        
+        factChecker = FactChecker()
+        
         // Do not call super in an Action extension with no user interface
         self.extensionContext = context
         
@@ -47,8 +51,10 @@ class ActionRequestHandler: NSObject, NSExtensionRequestHandling {
         // Here, do something, potentially asynchronously, with the preprocessing
         // results.
         
-        if let url = javaScriptPreprocessingResults["currentUrl"] as? String {
+        if let urlString = javaScriptPreprocessingResults["currentUrl"] as? String,
+            let url = URL(string: urlString) {
             print("URL: \(url)")
+            factChecker.factCheck(forUrl: url)
         }
         
         // In this very simple example, the JavaScript will have passed us the
