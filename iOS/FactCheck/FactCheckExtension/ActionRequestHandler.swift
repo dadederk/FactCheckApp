@@ -47,6 +47,10 @@ class ActionRequestHandler: NSObject, NSExtensionRequestHandling {
         // Here, do something, potentially asynchronously, with the preprocessing
         // results.
         
+        if let url = javaScriptPreprocessingResults["currentUrl"] as? String {
+            print("URL: \(url)")
+        }
+        
         // In this very simple example, the JavaScript will have passed us the
         // current background color style, if there is one. We will construct a
         // dictionary to send back with a desired new background color style.

@@ -17,7 +17,8 @@ Action.prototype = {
         // We will not modify anything, but will pass the body's background
         // style to the native code.
         
-        arguments.completionFunction({ "currentBackgroundColor" : document.body.style.backgroundColor })
+        arguments.completionFunction({ "currentBackgroundColor" : document.body.style.backgroundColor,
+                                     "currentUrl" : document.URL})
     },
     
     finalize: function(arguments) {
